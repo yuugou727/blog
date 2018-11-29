@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="zh-tw"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title>[驅動程式] 為 MSI GS60 啟用 Windows 10 觸控板手勢 | 歷史共業</title><meta name="description" content="[驅動程式] 為 MSI GS60 啟用 Windows 10 觸控板手勢 - Ronnie Chang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/blog/favicon.png"><link rel="stylesheet" href="/blog/css/theme.css"><link rel="search" type="application/opensearchdescription+xml" href="/blog/atom.xml" title="歷史共業"></head><body><div class="wrap"><header><h1 class="branding"><a href="/blog/" title="歷史共業"><img class="logo-image" src="/blog/logo.png" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link" href="/blog/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link" href="/blog/archives/" target="_self">ARCHIVES</a></li><li class="nav-list-item"><a class="nav-list-link" href="/blog/tags/" target="_self">TAGS</a></li><li class="nav-list-item"><a class="nav-list-link" href="https://yuugou727.github.io/" target="_blank">ABOUT</a></li><li class="nav-list-item"><a class="nav-list-link" href="/blog/atom.xml" target="_self">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">[驅動程式] 為 MSI GS60 啟用 Windows 10 觸控板手勢</h1><div class="post-info"><a></a>2018-09-15<span class="categories"><a class="post-category" href="/blog/categories/生活/">生活</a></span><ul class="tags"><li><a class="post-tag" href="/blog/tags/ELAN/">ELAN</a></li><li><a class="post-tag" href="/blog/tags/驅動程式/">驅動程式</a></li><li><a class="post-tag" href="/blog/tags/Windows-10/">Windows 10</a></li></ul></div><div class="post-content"><blockquote class="pullquote tip"><p><strong>不負責任聲明</strong>：本篇僅為個人研究筆記，不建議電腦生手效仿，所產生之不預期後果須自負</p>
+</blockquote>
+<p>有競爭才不會擠牙膏，微軟在 Windows 8 <del>不意外地</del>失勢後，眼看某些 PC 市場就要與 Mac 黃金交叉，發憤圖強下生出的 Windows 10 不得不說是蠻好用的，其中<del>瓢竊</del>致敬對手的觸控板手勢，也減少我下一台想換 Mac 的誘因，至少再戰個兩三年…</p>
+<a id="more"></a>
+<p>GS60 當初預裝 Windows 8，升到 Windows 10 後發現 ELAN 觸控板不支援手勢功能，微星也沒有提供新的驅動，所以就像閹割版的 OS ，開發效率硬是輸人許多，只有半殘的 ELAN 自帶手勢。<del>三指上滑投影片放映超雞肋</del></p>
+<p>就在某個解完 issue 的放鬆下午，一時興起搜到了<a href="https://www.reddit.com/r/MSILaptops/comments/5ki7ed/gs63vr_there_is_a_working_driver_for_using_the/" target="_blank" rel="noopener">這篇 Reddit</a>，美國鄉民用新版的 <a href="https://drivers.softpedia.com/get/Other-DRIVERS-TOOLS/Others/ELAN-Input-Device-for-WDF-Driver-161132-for-Windows-10-64-bit.shtml" target="_blank" rel="noopener">ELAN 驅動程式</a> 解開 GS63VR 觸控板的封印，這樣看來不是硬體不支援，純粹是官方懶的寫。文內提到<em>GS系列有可能適用</em>，試了幾十分鐘，過程有遇到小障礙也成功解封，這裡記一下粗略步驟，之後 1809 大型更新應該會再用到：</p>
+<blockquote class="pullquote tip"><p><strong>注意</strong>：安裝後將無法使用組合快捷鍵 <code>Fn + F3</code> 關閉觸控板功能</p>
+</blockquote>
+<h1 id="步驟"><a href="#步驟" class="headerlink" title="步驟"></a>步驟</h1><blockquote>
+<p>準備一隻外接滑鼠，以備驅動無效時之需</p>
+</blockquote>
+<ol>
+<li>下載連結.cab檔，打開把裡面檔案全部複製到外面開新資料夾存</li>
+<li>執行裡面的 <code>Setup.exe</code>，完成後重開機，若顯示不支援至第4步</li>
+<li>試看看三指、四指掃滑的切換 App、切換桌面，或檢查設定的觸控板有無此選項，沒成功的話往下強制更新驅動</li>
+<li>開始圖示上點右鍵 &gt; 裝置管理員 &gt; 滑鼠與指標裝置 &gt; 在「ELAN Input Device」上右鍵 &gt; 更新驅動程式</li>
+<li>選取第二項「瀏覽電腦上的程式軟體」 &gt; 「讓我從電腦上的可用驅動程式清單挑選」 &gt; 右下角「從磁片安裝」&gt; 路徑為一開始複製驅動的資料夾 &gt; 選取 <code>ETD.inf</code> 安裝</li>
+<li>重複 4, 5 安裝以下：<ul>
+<li>「人性化介面裝置」&gt;「ELAN miniport PTP Driver」選取 <code>ETDminiPTP.inf</code></li>
+<li>「系統裝置」&gt;「ELAN SMBus Driver」選取 <code>ETDSMBus.inf</code> </li>
+</ul>
+</li>
+<li>重新啟動，檢查裝置管理員安裝過的驅動版本號或日期是否正確，或者再 run 一次 <code>Setup.exe</code></li>
+</ol>
+<p>之後應能順利啟用，開始把玩各種手勢功能</p>
+<h3 id="備註"><a href="#備註" class="headerlink" title="備註"></a>備註</h3><p>步驟 4 ~ 6，除了「從磁片安裝」，也可以先在那那三個 .inf 檔上右鍵 &gt; 安裝，就能在可用的驅動程式清單中選取。</p>
+<p>若在 VScode 遇到捲動不順的情形，進 User Settings 將 <code>Window: Smooth Scrolling Workaround</code> 開啟，並將 <code>Window: Title Bar Style</code> 設為 <code>native</code>。</p>
+<h2 id="連結"><a href="#連結" class="headerlink" title="連結"></a>連結</h2><ul>
+<li><a href="https://drivers.softpedia.com/get/Other-DRIVERS-TOOLS/Others/ELAN-Input-Device-for-WDF-Driver-161132-for-Windows-10-64-bit.shtml" target="_blank" rel="noopener">ELAN Input Device for WDF Driver 16.11.3.2 for Windows 10 64-bit</a></li>
+</ul>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><ul>
+<li><a href="https://www.windowscentral.com/how-enable-precision-touchpad-drivers#ampshare=https://www.windowscentral.com/how-enable-precision-touchpad-drivers" target="_blank" rel="noopener">How to enable a Precision Touchpad for more gestures on your laptop</a> </li>
+<li><a href="https://www.youtube.com/watch?v=f2rfwR-IV-c" target="_blank" rel="noopener">Dave2D Youtube</a></li>
+<li><a href="https://www.msi.com/asset/global/picture/faq/10016371@2018-0802-0453-194359@kb_03177_ct.pdf" target="_blank" rel="noopener">GS65官方說明</a></li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a class="next" href="/blog/2018/08/26/ngx-translate-settranslation/">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'yuugou727';
+var disqus_config = function () {
+    this.page.url = 'https://yuugou727.github.io/blog/2018/09/15/msi-gs60-win10-gestures/';
+    this.page.identifier = '2018/09/15/msi-gs60-win10-gestures/';
+};
+(function() {
+    var d = document, s = d.createElement('script');
+    s.src = '//' + disqus_shortname  + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', + new Date());
+    (d.head || d.body).appendChild(s);
+})();</script><div class="copyright"><p>&copy; 2017 - 2018 <a href="https://yuugou727.github.io/">Ronnie Chang</a>.<br>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/yuugou727/hexo-theme-artemis-night" target="_blank">Artemis Night</a>.</p></div></footer></div><script>var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-104625762-1']);
+_gaq.push(['_trackPageview']);
+
+(function () {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();</script></body></html>

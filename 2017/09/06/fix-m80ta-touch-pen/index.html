@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="zh-tw"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title>Asus VivoTab Note 8 筆感應失效維修DIY | 歷史共業</title><meta name="description" content="Asus VivoTab Note 8 筆感應失效維修DIY - Ronnie Chang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/blog/favicon.png"><link rel="stylesheet" href="/blog/css/theme.css"><link rel="search" type="application/opensearchdescription+xml" href="/blog/atom.xml" title="歷史共業"></head><body><div class="wrap"><header><h1 class="branding"><a href="/blog/" title="歷史共業"><img class="logo-image" src="/blog/logo.png" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link" href="/blog/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link" href="/blog/archives/" target="_self">ARCHIVES</a></li><li class="nav-list-item"><a class="nav-list-link" href="/blog/tags/" target="_self">TAGS</a></li><li class="nav-list-item"><a class="nav-list-link" href="https://yuugou727.github.io/" target="_blank">ABOUT</a></li><li class="nav-list-item"><a class="nav-list-link" href="/blog/atom.xml" target="_self">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Asus VivoTab Note 8 筆感應失效維修DIY</h1><div class="post-info"><a></a>2017-09-06<span class="categories"><a class="post-category" href="/blog/categories/生活/">生活</a></span><ul class="tags"><li><a class="post-tag" href="/blog/tags/hardware/">hardware</a></li><li><a class="post-tag" href="/blog/tags/DIY/">DIY</a></li></ul></div><div class="post-content"><p>自從 2015 年 12 月發現這台附帶 Wacom 觸控筆、跑 Windows 的<strong>平板神器</strong>時它已經停產了，還去批踢踢二手板買一台來玩，心得是真的超值。除了不要太強求 Atom 處理器之外，堪用的感壓筆可以隨手塗鴉， Windows 8 也升上 Windows 10 順跑，搭配藍芽鍵盤就能坐咖啡廳一天了。現在仍是上班的豪夥伴：當第三螢幕查資料、聽 Spotify 玩玩市集等等。</p>
+<h3 id="但該來的總是會該來"><a href="#但該來的總是會該來" class="headerlink" title="但該來的總是會該來"></a>但該來的總是會該來</h3><p>而這台一直有個災情<del>不愧是以卵擊石</del>：<strong>螢幕觸控失效</strong>。而我則是發生<strong>感應筆失效</strong>的問題，背後原因是類似的。</p>
+<p>網友都幫整理好解決方法與教學了，寧願自己來也不送修。<del>看來大家都不太相信SOP只有重灌的皇家</del></p>
+<ul>
+<li><a href="http://katzdx.blogspot.tw/2015/09/asus-vivotab-note-8.html" target="_blank" rel="noopener">Asus VivoTab Note 8 使用一年心得</a></li>
+<li><a href="https://www.plurk.com/p/lan2xk" target="_blank" rel="noopener">https://www.plurk.com/p/lan2xk</a></li>
+</ul>
+<h2 id="Debug"><a href="#Debug" class="headerlink" title="Debug"></a>Debug</h2><p>網路消息大致都指向軟排線(FFC)走線問題，受到擠壓造成接觸不良。</p>
+<img src="/blog/2017/09/06/fix-m80ta-touch-pen/IMAG0006.jpg">
+<p>起初也是照著文章做，打開機殼重插排線後，就順利感應到筆了。</p>
+<p>但日後偵測不到的頻率越來越高，讓我懷疑是排線本身因為凹摺造成磨損斷路。乾脆一勞永逸，直接買現成排線來DIY，順便連觸控訊號的排線也一起換。</p>
+<blockquote>
+<img src="/blog/2017/09/06/fix-m80ta-touch-pen/IMAG0005.jpg">
+<p>DB是感壓筆訊號排線、TB是觸控訊號排線</p>
+</blockquote>
+<h3 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h3><ul>
+<li>DIY有一定風險，沒有信心請委託身邊工具人</li>
+<li>光華地下街有賣拆機工具組會好拆一些</li>
+<li>碰觸精密電路板一定要避免身上靜電</li>
+</ul>
+<h3 id="關鍵材料"><a href="#關鍵材料" class="headerlink" title="關鍵材料"></a>關鍵材料</h3><p>估狗整理了一下軟排線的規格，露天可以買到</p>
+<blockquote>
+<ul>
+<li>FFC-8PIN-0.5-40mm-B</li>
+<li>FFC-10PIN-0.5-50mm-B</li>
+</ul>
+</blockquote>
+<p>其中 8pin 是筆排線DB、 10pin 是觸控排線TB，兩條都是 pin 腳寬度 0.5mm ，且為 <strong>type-B (異面)</strong>，長度越短的越好塞。</p>
+<img src="/blog/2017/09/06/fix-m80ta-touch-pen/IMAG0226.jpg">
+<h3 id="施工"><a href="#施工" class="headerlink" title="施工"></a>施工</h3><p>然而現成的有個缺點：藍色硬膠片沒有預留長度，沒有施力點可以塞進插槽，跟原廠(上面)的比很明顯。最後也只能用尖嘴鉗輕夾兩側慢慢塞進去…</p>
+<img src="/blog/2017/09/06/fix-m80ta-touch-pen/IMAG0227.jpg">
+<p>順利插上後，剩餘的長度要小心凹摺兩次讓它好收納，最後怕它在機殼內亂跑，用電工用紙膠帶簡單固定住。</p>
+<img src="/blog/2017/09/06/fix-m80ta-touch-pen/IMAG0222.jpg">
+<p>成果展示<br><img src="/blog/2017/09/06/fix-m80ta-touch-pen/IMAG0223.jpg"></p>
+<h3 id="測試結果"><a href="#測試結果" class="headerlink" title="測試結果"></a>測試結果</h3><p>從 2017 年 5 月施工完後至今，觸控與筆皆正常運作頭好壯壯，供熱血工程師魂人士參考。</p>
+</div></article></div></main><footer><div class="paginator"><a class="prev" href="/blog/2017/11/11/vue-login-practice/">上一篇</a><a class="next" href="/blog/2017/08/21/archeology-note/">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'yuugou727';
+var disqus_config = function () {
+    this.page.url = 'https://yuugou727.github.io/blog/2017/09/06/fix-m80ta-touch-pen/';
+    this.page.identifier = '2017/09/06/fix-m80ta-touch-pen/';
+};
+(function() {
+    var d = document, s = d.createElement('script');
+    s.src = '//' + disqus_shortname  + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', + new Date());
+    (d.head || d.body).appendChild(s);
+})();</script><div class="copyright"><p>&copy; 2017 - 2018 <a href="https://yuugou727.github.io/">Ronnie Chang</a>.<br>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/yuugou727/hexo-theme-artemis-night" target="_blank">Artemis Night</a>.</p></div></footer></div><script>var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-104625762-1']);
+_gaq.push(['_trackPageview']);
+
+(function () {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();</script></body></html>
