@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://yuugou727.github.io/blog/"/>
-  <updated>2018-11-29T05:18:41.771Z</updated>
+  <updated>2019-02-12T03:28:33.571Z</updated>
   <id>https://yuugou727.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>innerText、textContent 屬性加碼 Character Entity</title>
+    <link href="https://yuugou727.github.io/blog/2019/02/11/innerText-vs-textContent/"/>
+    <id>https://yuugou727.github.io/blog/2019/02/11/innerText-vs-textContent/</id>
+    <published>2019-02-11T12:39:04.000Z</published>
+    <updated>2019-02-12T03:28:33.571Z</updated>
+    
+    <content type="html"><![CDATA[<p>不意外地又荒廢了一段時間，<del>我是哪裡？這裡是誰？</del> 趁著開工手上沒太多事前先寫一點東西吧。小小探究一下 HTML 中有點讓人混淆的<code>innerText</code>與<code>textContent</code>。<br><a id="more"></a></p><h2 id="講古時間"><a href="#講古時間" class="headerlink" title="講古時間"></a>講古時間</h2><p>嚴格來說<code>textContent</code>最初就在 W3C 標準裡，<code>innerText</code>是 IE 在玩的東西，2016 年才被列入標準，FireFox 在45版後才跟進實作。這兩種屬性都能取得 HTML 元素中的文字，但結果有微妙的差異，可參閱 <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/innerText" target="_blank" rel="noopener">MDN</a>。</p><h2 id="比較"><a href="#比較" class="headerlink" title="比較"></a>比較</h2><ul><li><code>innerText</code>取得的是經瀏覽器引擎渲染後的<strong>純文字</strong>，所見即所得，連續空白會被整併，<code>&lt;style&gt;</code>tag或被style屬性所隱藏的區塊就不會列出等等</li><li><code>textContent</code>取得 HTML 中每個節點中含有<strong>文本</strong>的文字</li></ul><p>有聽沒有懂很正常，還是看個實際範例，以下是 folk 別人的 CodePen 再加以小修改的 code，慢慢用心體會：</p><iframe height="600" style="width: 100%;" scrolling="no" title="innerText vs. textContent &amp; trim()" src="//codepen.io/yuugou727/embed/vbRvJO/?height=600&theme-id=28350&default-tab=result" frameborder="no" allowtransparency="true" allowfullscreen="true"><br>  See the Pen <a href="https://codepen.io/yuugou727/pen/vbRvJO/" target="_blank" rel="noopener">innerText vs. textContent &amp; trim()</a> by Ronnie<br>  (<a href="https://codepen.io/yuugou727" target="_blank" rel="noopener">@yuugou727</a>) on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.<br></iframe><p>參透其中奧秘的話，要使用哪種方法取得文字就看需求了，像是如果不想要取得的文字被<code>&lt;pre&gt;</code>、<code>&lt;p&gt;</code>等tag斷行，或想保留空白、忠實呈現 HTML 裡的 Enter 換行，就會考慮使用<code>textContent</code>。</p><h2 id="Character-Entity-Reference"><a href="#Character-Entity-Reference" class="headerlink" title="Character Entity Reference"></a>Character Entity Reference</h2><p>在後面幾段塞的特殊字元，中文翻為<em>字元實體參照</em>，一種用 name 或 number 來表示 Unicode 字元的方式，可以參考 <a href="https://dev.w3.org/html5/html-author/charref" target="_blank" rel="noopener">Character Entity Reference Chart</a>，最常見的大概就<code>&amp;nbsp;</code>（不斷行空格符號）。</p><p>這些字元代表特殊格式的 unicode，瀏覽器渲染時幾乎跟空格一樣，但經由<code>innerHTML</code>或<code>textContent</code>取出後，這些字元才根據其格式表現出來。</p><p>其實這才是寫本文的動機，算之前工作遇到的小坑，剛好和取網頁元素文字的需求喇在一起，迸出新滋味、試誤試到懷疑人生。原本看起來正常的 HTML，print 出來突然縮排換行嚇死人，什麼？案例太極端了用不到？當然不會遇到最好，然而墨菲定律告訴我們：夜路走多碰到鬼，code寫多踩到雷，看過有印象才知道可能的雷藏在哪。</p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul><li><a href="https://stackoverflow.com/questions/11984029/difference-between-32-and-nbsp" target="_blank" rel="noopener">Difference between &amp;#32; and &amp;nbsp;</a></li><li><a href="https://dev.w3.org/html5/html-author/charref" target="_blank" rel="noopener">Character Entity Reference Chart</a></li><li><a href="https://entitycode.com/#common-content" target="_blank" rel="noopener">https://entitycode.com/#common-content</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;不意外地又荒廢了一段時間，&lt;del&gt;我是哪裡？這裡是誰？&lt;/del&gt; 趁著開工手上沒太多事前先寫一點東西吧。小小探究一下 HTML 中有點讓人混淆的&lt;code&gt;innerText&lt;/code&gt;與&lt;code&gt;textContent&lt;/code&gt;。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="前端筆記" scheme="https://yuugou727.github.io/blog/categories/%E5%89%8D%E7%AB%AF%E7%AD%86%E8%A8%98/"/>
+    
+    
+      <category term="HTML" scheme="https://yuugou727.github.io/blog/tags/HTML/"/>
+    
+  </entry>
   
   <entry>
     <title>[驅動程式] 為 MSI GS60 啟用 Windows 10 觸控板手勢</title>
@@ -475,31 +497,6 @@
     <summary type="html">
     
       &lt;p&gt;如果 if-else 內的處理邏輯很簡單具有共同性，例如只是宣告或回傳某值，可以考慮使用 &lt;a href=&quot;https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/Conditional_Operator&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Ternary Operator(三元運算子)&lt;/a&gt;寫成，不用長長一串之外更為直觀，這是自己常寫 if else 被制約而忘掉的寫法:P。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="前端筆記" scheme="https://yuugou727.github.io/blog/categories/%E5%89%8D%E7%AB%AF%E7%AD%86%E8%A8%98/"/>
-    
-    
-      <category term="JavaScript" scheme="https://yuugou727.github.io/blog/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>常用的method與小技巧</title>
-    <link href="https://yuugou727.github.io/blog/2017/04/02/method-technique/"/>
-    <id>https://yuugou727.github.io/blog/2017/04/02/method-technique/</id>
-    <published>2017-04-01T17:13:48.000Z</published>
-    <updated>2018-11-29T05:18:41.757Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="string與array互轉-split-join-toString"><a href="#string與array互轉-split-join-toString" class="headerlink" title="string與array互轉: split(), join(), toString()"></a>string與array互轉: <code>split(), join(), toString()</code></h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str1 = <span class="string">'AEIOU'</span>;</span><br><span class="line"><span class="keyword">var</span> arr = str1.split(<span class="string">''</span>);  <span class="comment">// 回傳['A','E','I','O','U'], 不改變原string</span></span><br><span class="line"><span class="keyword">var</span> str2 = arr.join(<span class="string">'~'</span>);  <span class="comment">// 回傳'A~E~I~O~U', 不改變原array</span></span><br><span class="line">arr.toString(); <span class="comment">// 'A,E,I,O,U', 改變原array變成string</span></span><br></pre></td></tr></table></figure><h3 id="遍歷array回傳新array-map"><a href="#遍歷array回傳新array-map" class="headerlink" title="遍歷array回傳新array: map()"></a>遍歷array回傳新array: <code>map()</code></h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr1 = [<span class="number">20</span>,<span class="number">6</span>,<span class="number">38</span>,<span class="number">15</span>,<span class="number">11</span>];</span><br><span class="line"><span class="keyword">var</span> arr2 = arr1.map(<span class="function"><span class="keyword">function</span>(<span class="params">v</span>)</span>&#123; <span class="keyword">return</span> v &gt; <span class="number">14</span> &#125;); <span class="comment">//回傳[20,38,15], 不改變原array</span></span><br></pre></td></tr></table></figure><h3 id="單純判斷array中某值是否存在-運用indexOf"><a href="#單純判斷array中某值是否存在-運用indexOf" class="headerlink" title="單純判斷array中某值是否存在: 運用indexOf()"></a>單純判斷array中某值是否存在: 運用<code>indexOf()</code></h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="string">'A'</span>,<span class="string">'C'</span>,<span class="string">'E'</span>];</span><br><span class="line"><span class="built_in">console</span>.log( arr.indexOf(<span class="string">'B'</span>) &gt; <span class="number">-1</span> ); <span class="comment">// 'false'</span></span><br><span class="line"><span class="comment">// indexOf() returns -1 when there's no matched index of item.</span></span><br></pre></td></tr></table></figure><h3 id="移除array中重複的值"><a href="#移除array中重複的值" class="headerlink" title="移除array中重複的值:"></a>移除array中重複的值:</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newArr = originArr.filter(<span class="function"><span class="keyword">function</span>(<span class="params">v,i,arr</span>)</span>&#123; retrun arr.indexOf(v) === i &#125;)</span><br></pre></td></tr></table></figure><p>p.s. ES6可使用新的 <a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Set" target="_blank" rel="noopener">Set 物件</a>。類似array的資料結構但值不會重複，但沒有index，操作上要熟用Set的method。</p><h3 id="取得object的”長度”-有幾組key-value-pairs"><a href="#取得object的”長度”-有幾組key-value-pairs" class="headerlink" title="取得object的”長度”(有幾組key-value pairs):"></a>取得object的”長度”(有幾組key-value pairs):</h3><p>(碎碎念)應付有些API傳的data明明適合用array，硬要丟json object過來的情況…</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = &#123; </span><br><span class="line">  <span class="string">'1'</span>:<span class="string">'Google'</span>,</span><br><span class="line">  <span class="string">'2'</span>:<span class="string">'Apple'</span>,</span><br><span class="line">  <span class="string">'3'</span>:<span class="string">'Facebook'</span>,</span><br><span class="line">  <span class="string">'4'</span>:<span class="string">'Microsoft'</span>,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">Object</span>.keys(result).length ); <span class="comment">//4 , ['1', '2', '3', '4'].length</span></span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;string與array互轉-split-join-toString&quot;&gt;&lt;a href=&quot;#string與array互轉-split-join-toString&quot; class=&quot;headerlink&quot; title=&quot;string與array互轉: split(),
-      
     
     </summary>
     
