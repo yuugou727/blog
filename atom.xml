@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="https://yuugou727.github.io/blog/"/>
-  <updated>2019-02-12T03:28:33.571Z</updated>
+  <updated>2019-02-17T14:39:43.129Z</updated>
   <id>https://yuugou727.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>將table存成csv檔案</title>
+    <link href="https://yuugou727.github.io/blog/2019/02/17/download-table-as-csv/"/>
+    <id>https://yuugou727.github.io/blog/2019/02/17/download-table-as-csv/</id>
+    <published>2019-02-17T13:37:19.000Z</published>
+    <updated>2019-02-17T14:39:43.129Z</updated>
+    
+    <content type="html"><![CDATA[<p>一樣是工作筆記，記錄一下將網頁的表格<code>&lt;table&gt;</code>存成CSV的做法。<br><a id="more"></a><br>還是寫成了 CodePen 範例比較好理解：</p><p></p><p class="codepen" data-height="300" data-theme-id="28350" data-default-tab="js,result" data-user="yuugou727" data-slug-hash="MqVRRb" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="download table as CSV"><br>  <span>See the Pen <a href="https://codepen.io/yuugou727/pen/MqVRRb/" target="_blank" rel="noopener"><br>  download table as CSV</a> by Ronnie (<a href="https://codepen.io/yuugou727" target="_blank" rel="noopener">@yuugou727</a>)<br>  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span><br></p><p></p><script async src="https://static.codepen.io/assets/embed/ei.js"></script><p>測試了一些包含空格、雙引號跟前一篇 Character Entity 的情況，可以輸出 csv 字串到console 看。 </p><h2 id="要點"><a href="#要點" class="headerlink" title="要點"></a>要點</h2><ul><li>將<code>&lt;thead&gt;</code>與<code>&lt;tbody&gt;</code>裡的值組成二維陣列，用<code>querySelectorAll</code>爬到的元素陣列是Array-like Object，用 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax" target="_blank" rel="noopener">Spread-syntax</a> 可以轉換成 array 使用<code>map</code>方法</li><li>csv 格式中，欄位的值用雙引號<code>&quot;</code>包住，原始資料帶有雙引號字元則用兩個雙引號<code>&quot;&quot;</code>取代。用逗號<code>,</code>分隔每欄，再用換行符<code>\n</code>分隔每列</li><li>在 blob 最前面加上 <a href="https://en.wikipedia.org/wiki/Byte_order_mark" target="_blank" rel="noopener">BOM</a> 標示為 utf-8 編碼</li><li>下載：將 blob 轉換成 objectURL，建立一個<code>a</code>元素寫入其屬性，append、直接呼叫<code>click()</code>後 remove</li><li><del>人活得好好的為什麼要支援IE</del>對於 IE 下載 blob 的方法使用<code>navigator.msSaveBlob()</code></li></ul><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul><li><a href="https://stackoverflow.com/questions/17879198/adding-utf-8-bom-to-string-blob" target="_blank" rel="noopener">Adding UTF-8 BOM to string/Blob</a></li><li>Saving files locally using Blob and msSaveBlob<br><a href="https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/samples/hh779016(v=vs.85)" target="_blank" rel="noopener">https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/samples/hh779016(v=vs.85)</a></li><li><a href="https://ryotah.hatenablog.com/entry/2017/03/22/211227" target="_blank" rel="noopener">クライアント側でCSV生成してダウンロードさせる</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一樣是工作筆記，記錄一下將網頁的表格&lt;code&gt;&amp;lt;table&amp;gt;&lt;/code&gt;存成CSV的做法。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="前端筆記" scheme="https://yuugou727.github.io/blog/categories/%E5%89%8D%E7%AB%AF%E7%AD%86%E8%A8%98/"/>
+    
+    
+      <category term="HTML" scheme="https://yuugou727.github.io/blog/tags/HTML/"/>
+    
+      <category term="Javascript" scheme="https://yuugou727.github.io/blog/tags/Javascript/"/>
+    
+  </entry>
   
   <entry>
     <title>innerText、textContent 屬性加碼 Character Entity</title>
@@ -475,28 +499,6 @@
 &lt;li&gt;&lt;a href=&quot;https://coderwall.com/p/6e7rea/consider-lookup-tables-instead-of-switch-or-if-else&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Consider lookup tables instead of switch or if/else&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;基本上就是建議把 &lt;code&gt;if else&lt;/code&gt;/&lt;code&gt;switch&lt;/code&gt; 改用一個 object 寫成 table 表，直接用對 key 的方式查找。
-    
-    </summary>
-    
-      <category term="前端筆記" scheme="https://yuugou727.github.io/blog/categories/%E5%89%8D%E7%AB%AF%E7%AD%86%E8%A8%98/"/>
-    
-    
-      <category term="JavaScript" scheme="https://yuugou727.github.io/blog/tags/JavaScript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ternary Operator(三元運算子)</title>
-    <link href="https://yuugou727.github.io/blog/2017/04/09/ternary-operator/"/>
-    <id>https://yuugou727.github.io/blog/2017/04/09/ternary-operator/</id>
-    <published>2017-04-09T04:23:46.000Z</published>
-    <updated>2018-11-29T05:18:41.757Z</updated>
-    
-    <content type="html"><![CDATA[<p>如果 if-else 內的處理邏輯很簡單具有共同性，例如只是宣告或回傳某值，可以考慮使用 <a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/Conditional_Operator" target="_blank" rel="noopener">Ternary Operator(三元運算子)</a>寫成，不用長長一串之外更為直觀，這是自己常寫 if else 被制約而忘掉的寫法:P。<br><a id="more"></a><br>例如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> grade = <span class="function"><span class="keyword">function</span>(<span class="params">score</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>( score &lt; <span class="number">60</span> )&#123; <span class="keyword">return</span> <span class="string">'failed'</span> &#125;</span><br><span class="line">  <span class="keyword">else</span>&#123; <span class="keyword">return</span> <span class="string">'passed'</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>用 Ternary Operator 寫成：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> grade = <span class="function"><span class="keyword">function</span>(<span class="params">score</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> score &lt; <span class="number">60</span> ? <span class="string">'failed'</span> : <span class="string">'passed'</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p><p>一行解決，如果支援 ES6 的話搭配 <a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="noopener">Arrow function</a> 使用，更乾淨俐落。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> grade = <span class="function">(<span class="params">score</span>) =&gt;</span> score &lt; <span class="number">60</span> ? <span class="string">'failed'</span> : <span class="string">'passed'</span>; <span class="comment">// available with ES6</span></span><br></pre></td></tr></table></figure></p><p>可以多組判斷串接，相當於 if 之後的 else if:<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> rank = <span class="function">(<span class="params">score</span>) =&gt;</span> score&gt;=<span class="number">95</span> ? <span class="string">'S'</span> : score&gt;=<span class="number">80</span> ? <span class="string">'A'</span> : <span class="string">'B'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(rank(<span class="number">95</span>),rank(<span class="number">85</span>),rank(<span class="number">70</span>)); <span class="comment">//"S" "A" "B"</span></span><br></pre></td></tr></table></figure></p><p>直接寫在變數宣告中，應用上能限制一些意外的計算結果如 <code>NaN</code> 或 <code>Infinity</code>。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hitRate</span>(<span class="params"> hit, shot </span>)</span>&#123;</span><br><span class="line">  <span class="comment">//var rate = hit / shot;  /* 當shot=0, hit=0時會得到NaN */</span></span><br><span class="line">  <span class="keyword">var</span> rate = shot == <span class="number">0</span> ? <span class="number">0</span> : hit / shot; <span class="comment">//限制shot為0時讓rate直接代0</span></span><br><span class="line">  <span class="keyword">if</span>( rate &gt; <span class="number">0.4</span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'MVP'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;如果 if-else 內的處理邏輯很簡單具有共同性，例如只是宣告或回傳某值，可以考慮使用 &lt;a href=&quot;https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/Conditional_Operator&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Ternary Operator(三元運算子)&lt;/a&gt;寫成，不用長長一串之外更為直觀，這是自己常寫 if else 被制約而忘掉的寫法:P。&lt;br&gt;
     
     </summary>
     
