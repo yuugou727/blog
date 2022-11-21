@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="zh-tw"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title>Raspberry Pi wifi 故障排除筆記 | 歷史共業</title><meta name="description" content="Raspberry Pi wifi 故障排除筆記 - Ronnie Chang"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/blog/favicon.png"><link rel="stylesheet" href="/blog/css/theme.css"><link rel="search" type="application/opensearchdescription+xml" href="/blog/atom.xml" title="歷史共業"><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/blog/atom.xml" title="歷史共業" type="application/atom+xml">
+</head><body><div class="wrap"><header><h1 class="branding"><a href="/blog/" title="歷史共業"><img class="logo-image" src="/blog/logo.png" alt="logo"></a></h1><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link" href="/blog/" target="_self">HOME</a></li><li class="nav-list-item"><a class="nav-list-link" href="/blog/archives/" target="_self">ARCHIVES</a></li><li class="nav-list-item"><a class="nav-list-link" href="/blog/tags/" target="_self">TAGS</a></li><li class="nav-list-item"><a class="nav-list-link" href="https://yuugou727.github.io/" target="_blank">ABOUT</a></li><li class="nav-list-item"><a class="nav-list-link" href="/blog/atom.xml" target="_self">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Raspberry Pi wifi 故障排除筆記</h1><div class="post-info"><a></a>2021-11-21<span class="categories"><a class="post-category" href="/blog/categories/%E7%94%9F%E6%B4%BB/">生活</a></span><ul class="tags"><li><a class="post-tag" href="/blog/tags/Raspberry-Pi/">Raspberry Pi</a></li></ul></div><div class="post-content"><p>手上有塊古董 Raspberry Pi Model B+，偶爾拿來連 ssh 玩玩 Linux，由於是初代沒 Wifi 的型號，同樣用上老舊的 Wifi dongle（USB 無線網卡）。</p>
+<p>然而不知從何開始，總是無法從分享器後台查到 IP，也就是連線失敗。<span id="more"></span>無論刷了多少遍 image，貼上多少次 <code>wpa_supplicant.conf</code> 到 SD 卡也一樣，無奈當時身邊只有一台筆電，沒外接鍵盤、螢幕根本無從判斷問題。</p>
+<p>最近剛 setup 好遠端工作環境，多了大螢幕跟機械鍵盤效率加倍，也順便來解決埋藏已久的 issue。</p>
+<h2 id="過程"><a href="#過程" class="headerlink" title="過程"></a>過程</h2><p>從本機能順利登入、下指令也正常反應，但當我直接跑 <code>raspi-config</code> 工具設定無線網路時，卻只顯示 WPA Supplicant 失敗的錯誤。</p>
+<p>於是再三檢查 .conf 檔，試著用指令手動設定 wpa_supplicant 時，得到了關鍵的錯誤訊息 - 驅動不支援：</p>
+<blockquote>
+<p>nl80211: Driver does not support authentication&#x2F;association or connect commands</p>
+</blockquote>
+<p>拿這段去估狗後，找到 wiki 與可能解法。</p>
+<h2 id="測試"><a href="#測試" class="headerlink" title="測試"></a>測試</h2><p>首先 kill 掉正在執行的無線網路：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo killall wpa_supplicant</span><br></pre></td></tr></table></figure>
+
+<p>帶上 <code>-D wext</code> 參數，降級用傳統的 <code>wext</code> 驅動，重新設定無線網路介面（<code>-i</code> 請參考 <code>ifconfig</code> 自行判斷介面名稱）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo wpa_supplicant -B -i wlan0 -D wext -c /etc/wpa_supplicant/wpa_supplicant.conf</span><br></pre></td></tr></table></figure>
+
+<p>dongle 燈號開始閃爍，順利連上 Wifi！就此確認是預設驅動的影響。</p>
+<h2 id="設定預設驅動"><a href="#設定預設驅動" class="headerlink" title="設定預設驅動"></a>設定預設驅動</h2><p>為了讓 Raspberry Pi 每次重開機後，都會自動以 <code>wext</code> 驅動無線網卡，不用再接螢幕鍵盤設定，我們只需編輯 <code>/etc/dhcpcd.conf</code> 檔案，寫入該介面的預設環境即可：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">interface wlan0</span><br><span class="line">env ifwireless=1</span><br><span class="line">env wpa_supplicant_driver=wext</span><br></pre></td></tr></table></figure>
+
+<p>從此開心用 ssh 玩 Raspberry Pi，希望這篇對用老舊 dongle 的人有幫助。</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://raspberrypi.stackexchange.com/a/103442">WiFi won’t start</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.archlinux.org/title/Wpa_supplicant#nl80211_driver_not_supported_on_some_hardware">nl80211 driver not supported on some hardware</a></li>
+<li><a target="_blank" rel="noopener" href="https://superuser.com/questions/1434621/set-wpa-supplicant-default-driver-on-startup">Set wpa_supplicant default driver on startup</a></li>
+</ul>
+</div></article></div></main><footer><div class="paginator"><a class="next" href="/blog/2019/06/30/angular-form-array/">下一篇</a></div><div id="disqus_thread"></div><script>var disqus_shortname = 'yuugou727';
+var disqus_config = function () {
+    this.page.url = 'https://yuugou727.github.io/blog/2021/11/21/raspberry-pi-wifi-dongle-driver/';
+    this.page.identifier = '2021/11/21/raspberry-pi-wifi-dongle-driver/';
+};
+(function() {
+    var d = document, s = d.createElement('script');
+    s.src = '//' + disqus_shortname  + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', + new Date());
+    (d.head || d.body).appendChild(s);
+})();</script><div class="copyright"><p>&copy; 2017 - 2022 <a href="https://yuugou727.github.io/">Ronnie Chang</a>.<br>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/yuugou727/hexo-theme-artemis-night" target="_blank">Artemis Night</a>.</p></div></footer></div><script>var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-104625762-1']);
+_gaq.push(['_trackPageview']);
+
+(function () {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();</script></body></html>
